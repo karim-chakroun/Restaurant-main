@@ -1,0 +1,87 @@
+<div class="container">
+
+
+  <div class="row" *ngIf="uService.roleMatch(['Agent'])">
+    <div class="col"></div>
+    <div class="col">
+      <button mat-raised-button color="primary" (click)="ajouterDialog()">Ajouter un plat</button>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>nom</th>
+            <th>prix</th>
+
+            <th>description</th>
+            <th>image</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let plat of platsDetalis">
+            <td>{{plat.nom}}</td>
+            <td>{{plat.prix}}</td>
+            <td>{{plat.description}}</td>
+            <td>{{plat.image}}</td>
+            <td><button mat-raised-button color="primary" (click)="onDelete(plat.id)">Supprimetr</button> </td>
+            <td><button mat-raised-button color="primary" (click)=onSubmit2(plat.id)>Modifeir</button></td>
+            <td><button mat-raised-button color="primary" (click)="onSubmit(plat.id)">Afficher</button></td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+    <div class="col">
+      <div class="col-sm-6">
+        <div class="card" style="width:20rem" *ngIf="platsbyid">
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Objet : </strong>{{platsbyid.nom}} </li>
+              <li class="list-group-item"><strong>Date : </strong>{{platsbyid.prix}} </li>
+              <li class="list-group-item"><strong>Description : </strong>{{platsbyid.description}} </li>
+              <li class="list-group-item"><strong>image : </strong>{{platsbyid.image}} </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div *ngIf="platsbyid2">
+        <form [formGroup]="service.formModel" (submit)="onEdit(platsbyid2.id)">
+          <div class="mb-3">
+            <label class="form-label">Nom</label>
+            <input type="text" value="{{platsbyid2.nom}}" class="form-control" formControlName="Nom">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Prix</label>
+            <input type="number" value="{{platsbyid2.prix}}" class="form-control" formControlName="Prix">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" rows="3" value="{{platsbyid2.description}}"
+              formControlName="Description"></textarea>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row" *ngIf="uService.roleMatch(['Customer'])">
+    <div class="col-4" *ngFor="let plat of platsDetalis">
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{plat.nom}}</h5>
+          <p class="card-text">{{plat.description}}</p>
+
+          <button mat-raised-button color="primary" (click)="openDialog(plat.id)">Afficher les Détails</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

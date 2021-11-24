@@ -1,0 +1,50 @@
+<div class="container">
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+      <th>nom</th>
+      <th>prix</th>
+      
+      <th>description</th>
+      <th>image</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody><tr *ngFor="let drink of drinkDetails">
+      <td>{{drink.nom}}</td>
+      <td>{{drink.prix}}</td>
+      <td>{{drink.description}}</td>
+      <td>{{drink.image}}</td>
+      <td><button type="button" class="btn btn-success" (click)="onDelete(drink.id)">Supprimetr</button></td>
+        <td><button type="button" class="btn btn-success">Modifeir</button></td>
+        <td><button type="button" class="btn btn-success" (click)="onSubmit(drink.id)">Afficher</button></td>
+      
+    </tr>
+    </tbody>
+    
+    </table>
+  </div>
+  <div class="col">
+    <div class="col-sm-6">
+      <div class="card" style="width:30rem" *ngIf="drinkbyid">
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Objet : </strong>{{drinkbyid.nom}} </li>
+            <li class="list-group-item"><strong>Date : </strong>{{drinkbyid.prix}} </li>
+            <li class="list-group-item"><strong>Description : </strong>{{drinkbyid.description}} </li>
+            <li class="list-group-item"><strong>image : </strong>{{drinkbyid.image}} </li></ul>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+
+</div>
+</div>
+
+
+
+
+
